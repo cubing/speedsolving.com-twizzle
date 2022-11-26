@@ -22,7 +22,7 @@ class BbCode
 			}
 		}
 
-		return \XF::app()->templater()->renderTemplate('public:_media_site_embed_twizzle', [
+		return \XF::app()->templater()->renderTemplate('public:_media_site_embed_twizzle_link_encoded', [
 			'id' => $url,
 			'link_url' => $url,
 			'html_alg' => $html_alg
