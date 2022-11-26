@@ -6,25 +6,25 @@ Individual fields are separated in this document so they can be copied from e.g.
 
 ## Media Site ID
 
-```
+```text
 twizzle
 ```
 
 ## Site title
 
-```
+```text
 Twizzle
 ```
 
 ## Site URL
 
-```
+```text
 https://twizzle.net/
 ```
 
 ## Match URLs
 
-```
+```text
 #https://(alpha|beta)\.twizzle\.net/(.*/)?\?(?P<id>.*)#i
 ```
 
@@ -44,13 +44,13 @@ https://twizzle.net/
 
 Class:
 
-```
+```text
 Twizzle\BbCode
 ```
 
 Method:
 
-```
+```text
 matchCallback
 ```
 
@@ -58,12 +58,12 @@ matchCallback
 
 Class:
 
-```
+```text
 Twizzle\BbCode
 ```
 
 Method:
 
-```
+```text
 htmlCallback
 ```
