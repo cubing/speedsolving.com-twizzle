@@ -1,0 +1,14 @@
+{
+  "legacy_addon_id": "",
+  "title": "Twizzle",
+  "description": "Adds support for Twizzle URLs using a custom BB code and media.",
+  "version_id": 100,
+  "version_string": "0.1",
+  "dev": "Lucas Garron",
+  "dev_url": "https://github.com/cubing/speedsolving.com-twizzle",
+  "faq_url": "",
+  "support_url": "",
+  "extra_urls": [],
+  "require": [],
+  "icon": "twizzle.png"
+}

@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "node script/build.js",
+    "build": "npm run clean && node script/build.js",
     "lint": "npx rome check ./script ./src",
     "format": "npx rome format ./script ./src",
     "clean": "rm -rf ./dist",
