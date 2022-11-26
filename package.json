@@ -7,7 +7,8 @@
     "build": "node script/build.js",
     "lint": "npx rome check ./script ./src",
     "format": "npx rome format ./script ./src",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "serve-dist": "make build && cd ./dist/www.speedsolving.com && open http://localhost:3344/misc/twizzle/test.html && caddy file-server --listen :3344 --browse"
   },
   "devDependencies": {
     "barely-a-dev-server": "^0.4.1",
