@@ -11,12 +11,12 @@
     "serve-dist": "make build && cd ./dist/www.speedsolving.com && open http://localhost:3344/misc/twizzle/test.html && caddy file-server --listen :3344 --browse"
   },
   "devDependencies": {
+    "@types/node": "^18.11.9",
     "barely-a-dev-server": "^0.4.1",
     "esbuild": "^0.15.15",
     "rome": "^10.0.1"
   },
   "dependencies": {
-    "@types/node": "^18.11.9",
     "cubing": "^0.33.5"
   }
 }
