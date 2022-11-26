@@ -1,7 +1,7 @@
 if (!globalThis.twizzleLinkScript) {
   var script = document.createElement("script");
   globalThis.twizzleLinkScript = script;
-  script.src = "https://www.speedsolving.com/misc/twizzle/js/index.js";
+  script.src = "/misc/twizzle/js/index.js";
   script.type = "module";
 
   function append() {
@@ -10,7 +10,7 @@ if (!globalThis.twizzleLinkScript) {
     style.textContent = `
 @font-face {
   font-family: "Ubuntu";
-  src: url("https://www.speedsolving.com/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
+  src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
 }
 twizzle-forum-link {
   font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
