@@ -4,65 +4,90 @@ namespace Twizzle;
 
 class BbCode
 {
-    public static function bbcodeCallback($tagChildren, $tagOption, $tag, array $options, \XF\BbCode\Renderer\AbstractRenderer $renderer)
-    {
-        $rendered = $renderer->renderSubTreePlain($tagChildren, $options);
-        if (preg_match("/\[URL[^\]]*\](https:\/\/(alpha|beta)\.twizzle\.net\/.*)\[\/URL\]/i", $rendered, $match) === 1) {
-          $url = $match[1];
-        } else if (preg_match('/\[MEDIA=twizzle_link_encoded\](https%3A%2F%2F(alpha|beta)\.twizzle\.net%2F.*)\[\/MEDIA\]/i', $rendered, $match) === 1) {
-          $url = urldecode($match[1]);
-        } else {
-            $puzzle = $tag["option"];
-            $contents = $tag["children"][0];
-            $url = "https://alpha.twizzle.net/edit/?";
-            if ($puzzle) {
-                $url .= "puzzle=" . urlencode($puzzle) . "&";
-            }
-            if (is_string($contents) && $contents) {
-                $url .= "alg=" . urlencode($contents);
-            }
-        }
-
-        $html_alg = "";
-        $url_components = parse_url($url);
-        $href_url = "https://" . $url_components["host"] . $url_components["path"];
-        if (array_key_exists("query", $url_components)) {
-          parse_str($url_components["query"], $url_params);
-          if (array_key_exists("alg", $url_params)) {
-            $html_alg = $url_params["alg"];
+  public static function twizzleTagCallback($tagChildren, $tagOption, $tag, array $options, \XF\BbCode\Renderer\AbstractRenderer $renderer)
+  {
+      $rendered = $renderer->renderSubTreePlain($tagChildren, $options);
+      if (preg_match("/\[URL[^\]]*\](https:\/\/(alpha|beta)\.twizzle\.net\/.*)\[\/URL\]/i", $rendered, $match) === 1) {
+        return BbCode::renderURL($match[1]);
+      } else if (preg_match('/\[MEDIA=twizzle_link_encoded\](https%3A%2F%2F(alpha|beta)\.twizzle\.net%2F.*)\[\/MEDIA\]/i', $rendered, $match) === 1) {
+        return BbCode::renderURL(urldecode($match[1]));
+      } else {
+          $puzzle = $tag["option"];
+          $contents = $tag["children"][0];
+          $url = "https://alpha.twizzle.net/edit/?";
+          $params = array(
+          );
+          if ($puzzle) {
+              $params["puzzle"] = $puzzle;
           }
-          $href_url .= "?" . http_build_query($url_params);
-        }
+          if (is_string($contents) && $contents) {
+            $params["alg"] = $contents;
+          }
+          return BbCode::renderURL($url);
+      }
+  }
 
-        return '<div class="bbMediaWrapper">
+  public static function algTagCallback($tagChildren, $tagOption, $tag, array $options, \XF\BbCode\Renderer\AbstractRenderer $renderer)
+  {
+    $stickering = $tag["option"];
+    $contents = $tag["children"][0];
+    $params = array(
+      "setup-anchor" => "end"
+    );
+    if ($stickering) {
+      $params["stickering"] = $stickering;
+      $params["title"] = $stickering . " Alg";
+    }
+    if (is_string($contents) && $contents) {
+      $params["alg"] = $contents;
+    }
+    $url = "https://alpha.twizzle.net/edit/?" . http_build_query($params);
+    return BbCode::renderURL($url);
+  }
+
+  // Sanitizes and renders the given URL as a `<twizzle-forum-link>` element.
+  public static function renderURL($url) {
+    $html_alg = "";
+    $url_components = parse_url($url);
+    $href_url = "https://" . $url_components["host"] . $url_components["path"];
+    if (array_key_exists("query", $url_components)) {
+      parse_str($url_components["query"], $url_params);
+      if (array_key_exists("alg", $url_params)) {
+        $html_alg = $url_params["alg"];
+      }
+      $href_url .= "?" . http_build_query($url_params);
+    }
+
+    // Ideally we'd include the script only once per page, as a link. But this is a reasonable workaround for now.
+    return '<div class="bbMediaWrapper">
 <twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>
 <script>
 if (!globalThis.twizzleLinkScript) {
-  var script = document.createElement("script");
-  globalThis.twizzleLinkScript = script;
-  script.src = "/misc/twizzle/js/index.js";
-  script.type = "module";
+var script = document.createElement("script");
+globalThis.twizzleLinkScript = script;
+script.src = "/misc/twizzle/js/index.js";
+script.type = "module";
 
-  function append() {
-    document.body.appendChild(script);
-    const style = document.createElement("style");
-    style.textContent = `
+function append() {
+  document.body.appendChild(script);
+  const style = document.createElement("style");
+  style.textContent = `
 @font-face {
-  font-family: "Ubuntu";
-  src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
+font-family: "Ubuntu";
+src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
 }
 twizzle-forum-link {
-  font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
+font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
 }
 `;
-    document.body.appendChild(style);
-  }
+  document.body.appendChild(style);
+}
 
-  if (document.body) {
-    append();
-  } else {
-    window.addEventListener("DOMContentLoaded", append);
-  }
+if (document.body) {
+  append();
+} else {
+  window.addEventListener("DOMContentLoaded", append);
+}
 }
 </script>
 </div>';
