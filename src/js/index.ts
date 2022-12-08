@@ -1,5 +1,7 @@
+import { setAlgDebug } from "cubing/alg";
 import { TwizzleLink } from "cubing/twisty";
 
+setAlgDebug({caratNISSNotationEnabled: true})
 export class TwizzleForumLink extends TwizzleLink {
   constructor() {
     super({
