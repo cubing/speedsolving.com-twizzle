@@ -66,3 +66,14 @@ Method:
 ```text
 htmlCallback
 ```
+
+## BB Code tag
+
+- Replacement mode: PHP callback
+- Supports option parameter: optional
+- PHP Callback: `Twizzle\BbCode` :: `twizzleTagCallback`
+- Within this BB code
+  - Disable smilies
+  - Disable line break conversion
+  - Check: Disable auto-linking
+  - Check: Stop parsing BB code

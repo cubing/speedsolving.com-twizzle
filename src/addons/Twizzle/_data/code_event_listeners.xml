@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code_event_listeners>
+  <listener event_id="entity_post_save" execute_order="10" callback_class="Twizzle\PostSave" callback_method="conversationEntityPostSave" active="1" hint="XF\Entity\ConversationMessage" description="Twizzle"/>
+  <listener event_id="entity_post_save" execute_order="10" callback_class="Twizzle\PostSave" callback_method="threadEntityPostSave" active="1" hint="XF\Entity\Post" description="Twizzle"/>
+</code_event_listeners>
