@@ -2,28 +2,27 @@
 
 namespace Twizzle;
 
-class BbCode
-{
+class BbCode {
+  static function editorURL($params) {
+    return "https://alpha.twizzle.net/edit/?" . http_build_query($params);
+  }
+
   public static function twizzleTagCallback($tagChildren, $tagOption, $tag, array $options, \XF\BbCode\Renderer\AbstractRenderer $renderer)
   {
       $rendered = $renderer->renderSubTreePlain($tagChildren, $options);
-      if (preg_match("/\[URL[^\]]*\](https:\/\/(alpha|beta)\.twizzle\.net\/.*)\[\/URL\]/i", $rendered, $match) === 1) {
-        return BbCode::renderURL($match[1]);
-      } else if (preg_match('/\[MEDIA=twizzle_link_encoded\](https%3A%2F%2F(alpha|beta)\.twizzle\.net%2F.*)\[\/MEDIA\]/i', $rendered, $match) === 1) {
-        return BbCode::renderURL(urldecode($match[1]));
+      if (preg_match("/(https:\/\/(alpha|beta)\.twizzle\.net\/.*)/i", $rendered, $match) === 1) {
+        return self::renderURL($match[1]);
       } else {
           $puzzle = $tag["option"];
           $contents = $tag["children"][0];
-          $url = "https://alpha.twizzle.net/edit/?";
-          $params = array(
-          );
+          $params = array();
           if ($puzzle) {
               $params["puzzle"] = $puzzle;
           }
           if (is_string($contents) && $contents) {
             $params["alg"] = $contents;
           }
-          return BbCode::renderURL($url);
+          return self::renderURL(self::editorURL($params));
       }
   }
 
@@ -41,8 +40,7 @@ class BbCode
     if (is_string($contents) && $contents) {
       $params["alg"] = $contents;
     }
-    $url = "https://alpha.twizzle.net/edit/?" . http_build_query($params);
-    return BbCode::renderURL($url);
+    return self::renderURL(self::editorURL($params));
   }
 
   // Sanitizes and renders the given URL as a `<twizzle-forum-link>` element.
