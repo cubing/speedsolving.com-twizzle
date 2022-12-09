@@ -57,8 +57,7 @@ class BbCode {
     }
 
     // Ideally we'd include the script only once per page, as a link. But this is a reasonable workaround for now.
-    return '<div class="bbMediaWrapper">
-<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>
+    return '<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>
 <script>
 if (!globalThis.twizzleLinkScript) {
 var script = document.createElement("script");
@@ -87,7 +86,6 @@ if (document.body) {
   window.addEventListener("DOMContentLoaded", append);
 }
 }
-</script>
-</div>';
+</script>';
     }
 }

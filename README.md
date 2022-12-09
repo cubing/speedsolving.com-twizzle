@@ -33,10 +33,8 @@ https://twizzle.net/
 ## Embed Template
 
 ```html
-<div class="bbMediaWrapper">
-  <xf:js src="/misc/twizzle/twizzle-link.js" />
-  <twizzle-forum-link><a href="{$link_url}">Twizzle link</a><pre style="margin: 0">{$html_alg}</pre></twizzle-forum-link>
-</div>
+<xf:js src="/misc/twizzle/twizzle-link.js" />
+<twizzle-forum-link><a href="{$link_url}">Twizzle link</a><pre style="margin: 0">{$html_alg}</pre></twizzle-forum-link>
 ```
 
 ## URL match callback
