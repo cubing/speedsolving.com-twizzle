@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
-    "barely-a-dev-server": "^0.4.3",
+    "barely-a-dev-server": "^0.4.5",
     "esbuild": "^0.15.15",
     "rome": "^10.0.1"
   },
