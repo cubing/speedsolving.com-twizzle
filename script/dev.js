@@ -18,5 +18,7 @@ import { barelyServe } from "barely-a-dev-server";
 // });
 
 barelyServe({
-  entryRoot: "./src/js",
-})
+  entryRoot: "./src/js/",
+  setHeaders: (_, response) =>
+    response.setHeader("Access-Control-Allow-Origin", "*"),
+});
