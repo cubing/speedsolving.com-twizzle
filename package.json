@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "npm run clean && node script/build.js",
+    "dev": "node script/dev.js",
     "lint": "npx rome check ./script ./src",
     "format": "npx rome format ./script ./src",
     "clean": "rm -rf ./dist",
