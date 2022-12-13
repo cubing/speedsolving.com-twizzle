@@ -38,7 +38,7 @@ class PostSave
     $updated = false;
     while (preg_match("/(\[MEDIA=twizzle_link_encoded\]([^\[]*)\[\/MEDIA\])/i", $message, $match) === 1) {
       $url_encoded = self::sanitizeTwizzleURL(urldecode($match[2]));
-      $message = str_replace($match[1], "[twizzle_link]" . $url_encoded . "[/twizzle_link]", $message);
+      $message = str_replace($match[1], "[twizzle]" . $url_encoded . "[/twizzle]", $message);
       $updated = true;
     }
     if ($updated) {
