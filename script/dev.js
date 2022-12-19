@@ -8,6 +8,8 @@ import { barelyServe } from "barely-a-dev-server";
 
 barelyServe({
   entryRoot: "./src/js/",
+  port: 3344,
+  devDomain: "speedsolving-twizzle.localhost",
   setHeaders: (_, response) =>
     response.setHeader("Access-Control-Allow-Origin", "*"),
 });
