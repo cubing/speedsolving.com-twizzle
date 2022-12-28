@@ -68,7 +68,7 @@ class BbCode {
     return '<script src="/misc/twizzle/js/index.js" type="module"></script>
 <style>
   @font-face { font-family: "Ubuntu"; src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf"); }
-  twizzle-forum-link { font-family: Ubuntu, -apple-system, Tahoma, sans-serif; }
+  twizzle-forum-link { font-family: Ubuntu, Verdana, sans-serif; }
 </style>';
   }
 }
