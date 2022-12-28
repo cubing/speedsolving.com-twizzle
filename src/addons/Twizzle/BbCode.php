@@ -3,6 +3,43 @@
 namespace Twizzle;
 
 class BbCode {
+  static $haveAddedScriptTag = false;
+  static function addScriptTagOnce() {
+    if (self::$haveAddedScriptTag) {
+      return '';
+    }
+    self::$haveAddedScriptTag = true;
+    return '<script>
+if (!globalThis.twizzleLinkScript) {
+var script = document.createElement("script");
+globalThis.twizzleLinkScript = script;
+script.src = "/misc/twizzle/js/index.js";
+script.type = "module";
+
+function append() {
+  document.body.appendChild(script);
+  const style = document.createElement("style");
+  style.textContent = `
+@font-face {
+font-family: "Ubuntu";
+src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
+}
+twizzle-forum-link {
+font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
+}
+`;
+  document.body.appendChild(style);
+}
+
+if (document.body) {
+  append();
+} else {
+  window.addEventListener("DOMContentLoaded", append);
+}
+}
+</script>';
+  }
+
   static function editorURL($params) {
     return "https://alpha.twizzle.net/edit/?" . http_build_query($params);
   }
@@ -57,35 +94,6 @@ class BbCode {
     }
 
     // Ideally we'd include the script only once per page, as a link. But this is a reasonable workaround for now.
-    return '<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>
-<script>
-if (!globalThis.twizzleLinkScript) {
-var script = document.createElement("script");
-globalThis.twizzleLinkScript = script;
-script.src = "/misc/twizzle/js/index.js";
-script.type = "module";
-
-function append() {
-  document.body.appendChild(script);
-  const style = document.createElement("style");
-  style.textContent = `
-@font-face {
-font-family: "Ubuntu";
-src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
-}
-twizzle-forum-link {
-font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
-}
-`;
-  document.body.appendChild(style);
-}
-
-if (document.body) {
-  append();
-} else {
-  window.addEventListener("DOMContentLoaded", append);
-}
-}
-</script>';
-    }
+    return '<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>' . self::addScriptTagOnce();
+  }
 }
