@@ -3,43 +3,6 @@
 namespace Twizzle;
 
 class BbCode {
-  static $haveAddedScriptTag = false;
-  static function addScriptTagOnce() {
-    if (self::$haveAddedScriptTag) {
-      return '';
-    }
-    self::$haveAddedScriptTag = true;
-    return '<script>
-if (!globalThis.twizzleLinkScript) {
-var script = document.createElement("script");
-globalThis.twizzleLinkScript = script;
-script.src = "/misc/twizzle/js/index.js";
-script.type = "module";
-
-function append() {
-  document.body.appendChild(script);
-  const style = document.createElement("style");
-  style.textContent = `
-@font-face {
-font-family: "Ubuntu";
-src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf");
-}
-twizzle-forum-link {
-font-family: Ubuntu, -apple-system, Tahoma, sans-serif;
-}
-`;
-  document.body.appendChild(style);
-}
-
-if (document.body) {
-  append();
-} else {
-  window.addEventListener("DOMContentLoaded", append);
-}
-}
-</script>';
-  }
-
   static function editorURL($params) {
     return "https://alpha.twizzle.net/edit/?" . http_build_query($params);
   }
@@ -93,7 +56,19 @@ if (document.body) {
       $href_url .= "?" . http_build_query($url_params);
     }
 
-    // Ideally we'd include the script only once per page, as a link. But this is a reasonable workaround for now.
-    return '<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>' . self::addScriptTagOnce();
+    return '<twizzle-forum-link><a href="' . $href_url . '">Twizzle link</a><pre style="margin: 0">' . $html_alg . '</pre></twizzle-forum-link>' . self::addBoilerplate();
+  }
+
+  static $haveAddedBoilerplate = false;
+  static function addBoilerplate() {
+    if (self::$haveAddedBoilerplate) {
+      return '';
+    }
+    self::$haveAddedBoilerplate = true;
+    return '<script src="/misc/twizzle/js/index.js" type="module"></script>
+<style>
+  @font-face { font-family: "Ubuntu"; src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf"); }
+  twizzle-forum-link { font-family: Ubuntu, -apple-system, Tahoma, sans-serif; }
+</style>';
   }
 }
