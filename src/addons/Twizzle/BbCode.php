@@ -65,7 +65,7 @@ class BbCode {
       return '';
     }
     self::$haveAddedBoilerplate = true;
-    return '<script src="/misc/twizzle/js/index.js" type="module"></script>
+    return '<script src="/misc/twizzle/js/twizzle-forum-link.js" type="module"></script>
 <style>
   @font-face { font-family: "Ubuntu"; src: url("/misc/twizzle/font/ubuntu/Ubuntu-Regular.ttf"); }
   twizzle-forum-link { font-family: Ubuntu, Verdana, sans-serif; }

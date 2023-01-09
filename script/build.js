@@ -15,7 +15,7 @@ build({
   target: "es2020",
   bundle: true,
   splitting: true,
-  entryPoints: ["./src/js/index.ts"],
+  entryPoints: ["./src/js/twizzle-forum-link.ts"],
   outdir: "./dist/www.speedsolving.com/misc/twizzle/js/",
   minify: true,
   sourcemap: true,
@@ -46,7 +46,10 @@ export async function listFiles(folderPath, filter, relativePath) {
 }
 
 const hashes = {};
-for (const path of await listFiles(ADDON_DIST_DIR, (name) => name !==(".DS_Store") && !name.endsWith("/.DS_Store"))) {
+for (const path of await listFiles(
+  ADDON_DIST_DIR,
+  (name) => name !== ".DS_Store" && !name.endsWith("/.DS_Store"),
+)) {
   const sha256HashInstance = createHash("sha256");
 
   // // wat
