@@ -15,7 +15,7 @@ build({
   target: "es2020",
   bundle: true,
   splitting: true,
-  entryPoints: ["./src/js/twizzle-forum-link.ts"],
+  entryPoints: ["./src/js/misc/twizzle/js/twizzle-forum-link.ts"],
   outdir: "./dist/www.speedsolving.com/misc/twizzle/js/",
   minify: true,
   sourcemap: true,
