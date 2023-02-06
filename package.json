@@ -4,11 +4,12 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "npm run clean && node script/build.js",
+    "build": "npm run clean-for-build && node script/build.js",
     "dev": "node script/dev.js",
     "lint": "npx rome check ./script ./src",
     "format": "npx rome format ./script ./src",
-    "clean": "rm -rf ./dist",
+    "clean": "rm -rf ./dist/",
+    "clean-for-build": "rm -rf ./dist/www.speedsolving.com/src/addons/Twizzle/* ./dist/www.speedsolving.com/misc/twizzle/*",
     "serve-dist": "make build && cd ./dist/www.speedsolving.com && open http://localhost:3344/misc/twizzle/test.html && caddy file-server --listen :3344 --browse"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@
 # https://github.com/lgarron/Makefile-scripts
 
 # Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build dev lint format clean serve-dist
+NPM_COMMANDS = build dev lint format clean clean-for-build serve-dist
 
 .PHONY: $(NPM_COMMANDS)
 $(NPM_COMMANDS):
