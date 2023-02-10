@@ -33,7 +33,7 @@ https://twizzle.net/
 
 ```html
 <xf:js src="/misc/twizzle/twizzle-link.js" />
-<twizzle-forum-link><a href="{$link_url}">Twizzle link</a><pre style="margin: 0">{$html_alg}</pre></twizzle-forum-link>
+<twizzle-forum-link><fieldset><legend><a href="{$link_url}">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0">{$html_alg}</pre></fieldset></twizzle-forum-link>
 ```
 
 ## URL match callback
