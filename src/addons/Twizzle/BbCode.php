@@ -56,7 +56,7 @@ class BbCode {
       $href_url .= "?" . http_build_query($url_params);
     }
 
-    return '<twizzle-forum-link><fieldset><legend><a href="' . $href_url . '">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0">' . htmlentities($html_alg) . '</pre></fieldset></twizzle-forum-link>' . self::addBoilerplate();
+    return '<twizzle-forum-link><fieldset><legend><a href="' . $href_url . '">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0; white-space: pre-wrap;">' . htmlentities($html_alg) . '</pre></fieldset></twizzle-forum-link>' . self::addBoilerplate();
   }
 
   static $haveAddedBoilerplate = false;
