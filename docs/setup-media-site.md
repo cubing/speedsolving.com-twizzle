@@ -32,7 +32,12 @@ https://twizzle.net/
 ## Embed Template
 
 ```html
-<xf:js src="/misc/twizzle/js/twizzle-forum-link.js" />
+<xf:js>
+  script = document.createElement("script");
+  script.src = "/misc/twizzle/js/twizzle-forum-link.js";
+  script.type = "module";
+  document.body.appendChild(script);
+</xf:js>
 <twizzle-forum-link><fieldset><legend><a href="{$link_url}">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0; white-space: pre-wrap;">{$html_alg}</pre></fieldset></twizzle-forum-link>
 ```
 
