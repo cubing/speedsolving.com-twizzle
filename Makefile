@@ -23,3 +23,13 @@ cache-purge:
 		-H "Authorization: Bearer $(shell sudo cat ~/.ssh/secrets/CLOUDFLARE_SPEEDSOLVING_COM_CACHE_TOKEN.txt)" \
 		-H "Content-Type:application/json" \
 		--data '{"purge_everything":true}' # purge cubing.net cache
+
+.PHONY: manual-deploy
+manual-deploy: build
+	@echo "Opening Transmit for a manual deployment."
+	open -a "Transmit"
+	@echo "Press enter to purge the cache after the manual deployment is done."
+	@read
+
+.PHONY: deploy
+deploy: manual-deploy cache-purge
