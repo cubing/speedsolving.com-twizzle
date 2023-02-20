@@ -18,6 +18,8 @@ update-Makefile:
 
 .PHONY: cache-purge
 cache-purge:
+	@echo "To purge the cache once, sudo auth now."
+	@echo "Ctrl-C to cancel"
 	@curl -X POST \
 		"https://api.cloudflare.com/client/v4/zones/$(shell sudo cat ~/.ssh/secrets/CLOUDFLARE_SPEEDSOLVING_COM_ZONE.txt)/purge_cache" \
 		-H "Authorization: Bearer $(shell sudo cat ~/.ssh/secrets/CLOUDFLARE_SPEEDSOLVING_COM_CACHE_TOKEN.txt)" \
