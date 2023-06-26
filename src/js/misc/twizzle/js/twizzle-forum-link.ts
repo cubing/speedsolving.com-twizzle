@@ -4,7 +4,9 @@ export class TwizzleForumLink extends TwizzleLink {
   constructor() {
     super({
       cdnForumTweaks: true,
-      darkMode: document.documentElement.classList.contains("style-dark"),
+      colorScheme: document.documentElement.classList.contains("style-dark")
+        ? "dark"
+        : "light",
     });
   }
 }
