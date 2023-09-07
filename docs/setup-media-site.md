@@ -6,7 +6,7 @@ Individual fields are separated in this document so they can be copied from e.g.
 ## Media Site ID
 
 ```text
-twizzle
+twizzle_link_encoded
 ```
 
 ## Site title
@@ -46,7 +46,7 @@ https://twizzle.net/
 Class:
 
 ```text
-Twizzle\BbCode
+Twizzle\Media
 ```
 
 Method:
@@ -60,7 +60,7 @@ matchCallback
 Class:
 
 ```text
-Twizzle\BbCode
+Twizzle\Media
 ```
 
 Method:
@@ -71,10 +71,12 @@ htmlCallback
 
 ## BB Code tag
 
+- Tag: `twizzle`
+- Title: `Twizzle`
 - Replacement mode: PHP callback
 - Supports option parameter: optional
 - PHP Callback: `Twizzle\BbCode` :: `twizzleTagCallback`
-- Within this BB code
+- Advance options → Within this BB code
   - Disable smilies
   - Disable line break conversion
   - Check: Disable auto-linking
