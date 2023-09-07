@@ -45,39 +45,59 @@ class BbCode {
 
   // Sanitizes and renders the given URL as a `<twizzle-forum-link>` element.
   public static function renderURL($url, $force_url = false) {
-    $unescaped_setup_alg = NULL;
-    $unescaped_alg = "";
+    $alg_only = true;
+
+    $escaped_title_fieldset = '';
+    $escaped_setup_alg_fieldset = '';
+    $escaped_alg_pre_tag = "";
+
     $url_components = parse_url($url);
     $href_url = "https://" . $url_components["host"] . $url_components["path"];
     if (array_key_exists("query", $url_components)) {
       parse_str($url_components["query"], $url_params);
+      if (array_key_exists("title", $url_params)) {
+        $escaped_title_fieldset = self::fieldset("Title", nl2br(htmlentities($url_params["title"])), true);
+        $alg_only = false;
+      }
       if (array_key_exists("setup-alg", $url_params)) {
-        $unescaped_setup_alg = $url_params["setup-alg"];
+        $escaped_setup_alg_fieldset = self::fieldset("Setup", self::pre(htmlentities($url_params["setup-alg"])), true);
+        $alg_only = false;
       }
       if (array_key_exists("alg", $url_params)) {
-        $unescaped_alg = $url_params["alg"];
+        $escaped_alg_pre_tag = self::pre(htmlentities($url_params["alg"]));
       }
       $href_url .= "?" . http_build_query($url_params);
     }
+
     $anchor_escaped_html = '<a href="' . $href_url . '">Twizzle&nbsp;link</a>';
-    if (is_null($unescaped_setup_alg)) {
-      return '<twizzle-forum-link data-test="7">' . self::fieldset($anchor_escaped_html, self::pre(htmlentities($unescaped_alg))) . '</twizzle-forum-link>' . self::addBoilerplate($force_url);
+
+    if ($alg_only) {
+      return self::twizzle_forum_link(
+          self::fieldset($anchor_escaped_html, $escaped_alg_pre_tag)
+      ) . self::addBoilerplate($force_url);
     }
-    return '<twizzle-forum-link data-test="8">' . self::fieldset($anchor_escaped_html,
-               self::fieldset("Setup", self::pre(htmlentities($unescaped_setup_alg))) . self::fieldset("Moves", self::pre(htmlentities($unescaped_alg)), true)
-           ) . '</twizzle-forum-link>' . self::addBoilerplate($force_url);
+
+    return self::twizzle_forum_link(
+      self::fieldset($anchor_escaped_html,
+        $escaped_title_fieldset . $escaped_setup_alg_fieldset . self::fieldset("Moves", $escaped_alg_pre_tag)
+      )
+    ) . self::addBoilerplate($force_url);
   }
 
   private static function pre($escaped_inner_html) {
     return '<pre style="margin: 0; white-space: pre-wrap;">' . $escaped_inner_html . '</pre>';
   }
 
-  private static function fieldset($escaped_legend_inner_html, $escaped_inner_html, $use_margin_top = false) {
+  private static function fieldset($escaped_legend_inner_html, $escaped_inner_html, $use_margin_bottom = false) {
     $style_attribute = '';
-    if ($use_margin_top) {
-      $style_attribute = ' style="margin-top: 0.5em;"';
+    if ($use_margin_bottom) {
+      $style_attribute = ' style="margin-bottom: 0.5em;"';
     }
     return '<fieldset' . $style_attribute . '>' . '<legend>&nbsp;' . $escaped_legend_inner_html . '&nbsp;</legend>' . $escaped_inner_html . '</fieldset>';
+  }
+
+  private static function twizzle_forum_link($escaped_inner_html) {
+    return '<twizzle-forum-link>' . $escaped_inner_html . '</twizzle-forum-link>';
   }
 
   static $haveAddedBoilerplate = false;
