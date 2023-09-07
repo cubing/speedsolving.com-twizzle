@@ -45,18 +45,39 @@ class BbCode {
 
   // Sanitizes and renders the given URL as a `<twizzle-forum-link>` element.
   public static function renderURL($url) {
-    $html_alg = "";
+    $unescaped_setup_alg = NULL;
+    $unescaped_alg = "";
     $url_components = parse_url($url);
     $href_url = "https://" . $url_components["host"] . $url_components["path"];
     if (array_key_exists("query", $url_components)) {
       parse_str($url_components["query"], $url_params);
+      if (array_key_exists("setup-alg", $url_params)) {
+        $unescaped_setup_alg = $url_params["setup-alg"];
+      }
       if (array_key_exists("alg", $url_params)) {
-        $html_alg = $url_params["alg"];
+        $unescaped_alg = $url_params["alg"];
       }
       $href_url .= "?" . http_build_query($url_params);
     }
+    $anchor_escaped_html = '<a href="' . $href_url . '">Twizzle&nbsp;link</a>';
+    if (is_null($unescaped_setup_alg)) {
+      return '<twizzle-forum-link>' . self::fieldset($anchor_escaped_html, self::pre(htmlentities($unescaped_alg))) . '</twizzle-forum-link>' . self::addBoilerplate();
+    }
+    return '<twizzle-forum-link>' . self::fieldset($anchor_escaped_html,
+               self::fieldset("Setup", self::pre(htmlentities($unescaped_setup_alg))) . self::fieldset("Moves", self::pre(htmlentities($unescaped_alg)), true)
+           ) . '</twizzle-forum-link>' . self::addBoilerplate();
+  }
 
-    return '<twizzle-forum-link><fieldset><legend><a href="' . $href_url . '">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0; white-space: pre-wrap;">' . htmlentities($html_alg) . '</pre></fieldset></twizzle-forum-link>' . self::addBoilerplate();
+  private static function pre($escaped_inner_html) {
+    return '<pre style="margin: 0; white-space: pre-wrap;">' . $escaped_inner_html . '</pre>';
+  }
+
+  private static function fieldset($escaped_legend_inner_html, $escaped_inner_html, $use_margin_top = false) {
+    $style_attribute = '';
+    if ($use_margin_top) {
+      $style_attribute = ' style="margin-top: 0.5em;"';
+    }
+    return '<fieldset' . $style_attribute . '>' . '<legend>&nbsp;' . $escaped_legend_inner_html . '&nbsp;</legend>' . $escaped_inner_html . '</fieldset>';
   }
 
   static $haveAddedBoilerplate = false;
