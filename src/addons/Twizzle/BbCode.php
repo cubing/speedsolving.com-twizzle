@@ -44,7 +44,7 @@ class BbCode {
   }
 
   // Sanitizes and renders the given URL as a `<twizzle-forum-link>` element.
-  public static function renderURL($url) {
+  public static function renderURL($url, $force_url = false) {
     $unescaped_setup_alg = NULL;
     $unescaped_alg = "";
     $url_components = parse_url($url);
@@ -61,11 +61,11 @@ class BbCode {
     }
     $anchor_escaped_html = '<a href="' . $href_url . '">Twizzle&nbsp;link</a>';
     if (is_null($unescaped_setup_alg)) {
-      return '<twizzle-forum-link>' . self::fieldset($anchor_escaped_html, self::pre(htmlentities($unescaped_alg))) . '</twizzle-forum-link>' . self::addBoilerplate();
+      return '<twizzle-forum-link data-test="7">' . self::fieldset($anchor_escaped_html, self::pre(htmlentities($unescaped_alg))) . '</twizzle-forum-link>' . self::addBoilerplate($force_url);
     }
-    return '<twizzle-forum-link>' . self::fieldset($anchor_escaped_html,
+    return '<twizzle-forum-link data-test="8">' . self::fieldset($anchor_escaped_html,
                self::fieldset("Setup", self::pre(htmlentities($unescaped_setup_alg))) . self::fieldset("Moves", self::pre(htmlentities($unescaped_alg)), true)
-           ) . '</twizzle-forum-link>' . self::addBoilerplate();
+           ) . '</twizzle-forum-link>' . self::addBoilerplate($force_url);
   }
 
   private static function pre($escaped_inner_html) {
@@ -81,8 +81,8 @@ class BbCode {
   }
 
   static $haveAddedBoilerplate = false;
-  static function addBoilerplate() {
-    if (self::$haveAddedBoilerplate) {
+  static function addBoilerplate($force_url = false) {
+    if (self::$haveAddedBoilerplate && !$force_url) {
       return '';
     }
     self::$haveAddedBoilerplate = true;
@@ -92,4 +92,17 @@ class BbCode {
   twizzle-forum-link { font-family: Ubuntu, Verdana, sans-serif; }
 </style>';
   }
+
+	public static function mediaMatchCallback($url, $matchedId, \XF\Entity\BbCodeMediaSite $site, $siteId)
+	{
+		return urlencode($url);
+	}
+
+	public static function mediaHtmlCallback($mediaKey, array $site, $siteId)
+	{
+		$url = urldecode($mediaKey);
+		return \XF::app()->templater()->renderTemplate('public:_media_site_embed_twizzle_link_encoded', [
+			'id' => "UNUSED_ID",
+		]) . self::renderURL($url, true);
+	}
 }

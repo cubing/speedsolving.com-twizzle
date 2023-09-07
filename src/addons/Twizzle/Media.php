@@ -4,12 +4,13 @@ namespace Twizzle;
 
 class Media
 {
+	// TODO: remove this file once `Twizzle\BbCode` → `mediaMatchCallback` has proven itself.
 	public static function matchCallback($url, $matchedId, \XF\Entity\BbCodeMediaSite $site, $siteId)
 	{
 		return urlencode($url);
 	}
 
-	// TODO: figure out how to use/match the BbCode fallback.
+	// TODO: remove this file once `Twizzle\BbCode` → `mediaHtmlCallback` has proven itself.
 	public static function htmlCallback($mediaKey, array $site, $siteId)
 	{
 		$url = urldecode($mediaKey);

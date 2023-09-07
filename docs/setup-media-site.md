@@ -38,7 +38,6 @@ https://twizzle.net/
   script.type = "module";
   document.body.appendChild(script);
 </xf:js>
-<twizzle-forum-link><fieldset><legend><a href="{$link_url}">&nbsp;Twizzle&nbsp;link&nbsp;</a></legend><pre style="margin: 0; white-space: pre-wrap;">{$alg}</pre></fieldset></twizzle-forum-link>
 ```
 
 ## URL match callback
