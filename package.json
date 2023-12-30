@@ -19,6 +19,6 @@
     "rome": "^10.0.1"
   },
   "dependencies": {
-    "cubing": "^0.43.11"
+    "cubing": "^0.44.0"
   }
 }
