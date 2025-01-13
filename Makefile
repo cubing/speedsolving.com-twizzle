@@ -1,20 +1,38 @@
-# This Makefile is a wrapper around the scripts from `package.json`.
-# https://github.com/lgarron/Makefile-scripts
 
-# Note: the first command becomes the default `make` target.
-NPM_COMMANDS = build dev lint format clean clean-for-build serve-dist
+.PHONY: build
+build: clean-for-build
+	bun run script/build.ts
 
-.PHONY: $(NPM_COMMANDS)
-$(NPM_COMMANDS):
-	npm run $@
+.PHONY: dev
+dev:
+	bun run script/dev.ts
 
-# We write the npm commands to the top of the file above to make shell autocompletion work in more places.
-DYNAMIC_NPM_COMMANDS = $(shell node -e 'console.log(Object.keys(require("./package.json").scripts).join(" "))')
-UPDATE_MAKEFILE_SED_ARGS = "s/^NPM_COMMANDS = .*$$/NPM_COMMANDS = ${DYNAMIC_NPM_COMMANDS}/" Makefile
-.PHONY: update-Makefile
-update-Makefile:
-	if [ "$(shell uname -s)" = "Darwin" ] ; then sed -i "" ${UPDATE_MAKEFILE_SED_ARGS} ; fi
-	if [ "$(shell uname -s)" != "Darwin" ] ; then sed -i"" ${UPDATE_MAKEFILE_SED_ARGS} ; fi
+.PHONY: lint
+lint:
+	bun x rome check
+
+.PHONY: format
+format:
+	bun x rome check --write
+
+.PHONY: clean
+clean:
+	rm -rf ./dist/
+
+.PHONY: clean
+clean-for-build:
+	rm -rf ./dist/www.speedsolving.com/src/addons/Twizzle/* ./dist/www.speedsolving.com/misc/twizzle/*
+
+.PHONY: reset
+reset: clean
+	rm -rf ./node_modules
+
+.PHONY: serve
+serve-dist:
+	make build
+	cd ./dist/www.speedsolving.com
+	open http://localhost:3344/misc/twizzle/test.html
+	caddy file-server --listen :3344 --browse
 
 .PHONY: cache-purge
 cache-purge:

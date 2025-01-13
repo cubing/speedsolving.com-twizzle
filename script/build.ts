@@ -1,7 +1,7 @@
-import { build } from "esbuild";
-import { createHash } from "node:crypto";
+import { type BinaryLike, createHash } from "node:crypto";
 import { readdir, stat } from "node:fs/promises";
 import { join } from "node:path";
+import { build } from "esbuild";
 
 import { cp, readFile, writeFile } from "node:fs/promises";
 
@@ -23,12 +23,16 @@ build({
 
 await cp("./src/addons/Twizzle", ADDON_DIST_DIR, { recursive: true });
 
-export async function listFiles(folderPath, filter, relativePath) {
-  let childNames = await readdir(
+export async function listFiles(
+  folderPath: string,
+  filter: (path: string) => boolean,
+  relativePath?: string,
+) {
+  const childNames = await readdir(
     relativePath ? join(folderPath, relativePath) : folderPath,
   );
 
-  let ownMatches = [];
+  const ownMatches = [];
   let recursiveMatches = [];
   for (const childName of childNames) {
     const newRelativePath = relativePath
@@ -57,8 +61,9 @@ for (const path of await listFiles(
   // contents = contents.replaceAll("\r", "");
   // sha256HashInstance.update(contents, "ascii");
 
-  let contents = await readFile(join(ADDON_DIST_DIR, path));
-  sha256HashInstance.update(contents);
+  const contents = await readFile(join(ADDON_DIST_DIR, path));
+  // TODO: why don't `bun`'s types work out of the box?
+  sha256HashInstance.update(contents as unknown as BinaryLike);
   hashes[`${ADDON_SERVER_PATH}/${path}`] = sha256HashInstance.digest("hex");
 }
 await writeFile(

@@ -4,21 +4,17 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "npm run clean-for-build && node script/build.js",
-    "dev": "node script/dev.js",
-    "lint": "npx rome check ./script ./src",
-    "format": "npx rome format ./script ./src",
-    "clean": "rm -rf ./dist/",
-    "clean-for-build": "rm -rf ./dist/www.speedsolving.com/src/addons/Twizzle/* ./dist/www.speedsolving.com/misc/twizzle/*",
-    "serve-dist": "make build && cd ./dist/www.speedsolving.com && open http://localhost:3344/misc/twizzle/test.html && caddy file-server --listen :3344 --browse"
-  },
-  "devDependencies": {
-    "@types/node": "^18.11.9",
-    "barely-a-dev-server": "^0.4.11",
-    "esbuild": "^0.16.17",
-    "rome": "^10.0.1"
+    "lint": "make lint",
+    "format": "make format",
+    "prepublishOnly": "make prepublishOnly"
   },
   "dependencies": {
     "cubing": "^0.53.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.1.16",
+    "barely-a-dev-server": "^0.4.11",
+    "esbuild": "^0.16.17"
   }
 }
