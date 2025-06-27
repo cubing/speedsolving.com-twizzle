@@ -4,16 +4,20 @@ build: clean-for-build
 	bun run script/build.ts
 
 .PHONY: dev
-dev:
+dev: setup
 	bun run script/dev.ts
 
 .PHONY: lint
-lint:
+lint: setup
 	bun x rome check
 
 .PHONY: format
-format:
+format: setup
 	bun x rome check --write
+
+.PHONY: setup
+setup:
+	bun install --frozen-lockfile
 
 .PHONY: clean
 clean:
