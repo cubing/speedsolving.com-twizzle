@@ -49,12 +49,9 @@ cache-purge:
 		-H "Content-Type:application/json" \
 		--data '{"purge_everything":true}' # purge cubing.net cache
 
-.PHONY: manual-deploy
-manual-deploy: build
-	@echo "Opening Transmit for a manual deployment."
-	open -a "Transmit"
-	@echo "Press enter to purge the cache after the manual deployment is done."
-	@read
-
 .PHONY: deploy
-deploy: manual-deploy cache-purge
+deploy: deploy-dist cache-purge
+
+.PHONY: deploy-dist
+deploy-dist: setup clean build
+	./script/deploy.ts

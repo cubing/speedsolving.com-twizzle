@@ -21,3 +21,7 @@ script.type = "module";
 script.src = "http://speedsolving-twizzle.localhost:3344/misc/twizzle/js/twizzle-forum-link.js";
 document.body.appendChild(script)
 ```
+
+## Dependencies
+
+- `lftp` (for deployment)
