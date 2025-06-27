@@ -1,9 +1,7 @@
 import { type BinaryLike, createHash } from "node:crypto";
-import { readdir, stat } from "node:fs/promises";
+import { cp, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { build } from "esbuild";
-
-import { cp, readFile, writeFile } from "node:fs/promises";
 
 const ADDON_SERVER_PATH = "src/addons/Twizzle";
 const ADDON_DIST_DIR = `./dist/www.speedsolving.com/${ADDON_SERVER_PATH}/`;

@@ -9,11 +9,11 @@ dev: setup
 
 .PHONY: lint
 lint: setup
-	bun x rome check
+	bun x @biomejs/biome check
 
 .PHONY: format
 format: setup
-	bun x rome check --write
+	bun x @biomejs/biome check --write
 
 .PHONY: setup
 setup:
