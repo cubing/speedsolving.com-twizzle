@@ -31,7 +31,7 @@ export async function listFiles(
   );
 
   const ownMatches = [];
-  let recursiveMatches = [];
+  let recursiveMatches: string[] = [];
   for (const childName of childNames) {
     const newRelativePath = relativePath
       ? join(relativePath, childName)
@@ -47,7 +47,7 @@ export async function listFiles(
   return ownMatches.concat(recursiveMatches);
 }
 
-const hashes = {};
+const hashes: Record<string, string> = {};
 for (const path of await listFiles(
   ADDON_DIST_DIR,
   (name) => name !== ".DS_Store" && !name.endsWith("/.DS_Store"),

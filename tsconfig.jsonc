@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/tsconfig.json",
+  "compilerOptions": {
+    // TODO: this should not be necessary. `@types/node` and `@types/bun` have been compatible for a while, and we're avoiding other dependency versions that would mess with that.
+    "skipLibCheck": true
+  }
+}

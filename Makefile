@@ -10,6 +10,7 @@ dev: setup
 .PHONY: lint
 lint: setup
 	bun x @biomejs/biome check
+	bun x tsc --noEmit --project .
 
 .PHONY: format
 format: setup
