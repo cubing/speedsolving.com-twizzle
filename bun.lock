@@ -4,7 +4,7 @@
     "": {
       "name": "@cubing/speedsolving-twizzle",
       "dependencies": {
-        "cubing": "v0.56.0",
+        "cubing": "^0.58.2",
       },
       "devDependencies": {
         "@biomejs/biome": "^2.0.6",
@@ -115,7 +115,7 @@
 
     "comlink": ["comlink@4.4.2", "", {}, "sha512-OxGdvBmJuNKSCMO4NTl1L47VRp6xn2wG4F/2hYzB6tiCb709otOxtEYCSvK80PtjODfXXZu8ds+Nw5kVCjqd2g=="],
 
-    "cubing": ["cubing@0.56.0", "", { "dependencies": { "@types/three": "^0.169.0", "@types/web-bluetooth": "^0.0.20", "cmd-ts-too": "^0.15.3", "comlink": "^4.4.1", "random-uint-below": "v3.3.0", "three": "^0.170.0" }, "bin": { "scramble": "dist/bin/scramble.js" } }, "sha512-8CabQLEkWA2iCy4LeyCPN5fCUnfjmz3QJ/Zo6EInEdPX/X/QNHbLhjljfumNHFoM234davupDj/i6D+ml7wAVQ=="],
+    "cubing": ["cubing@0.58.2", "", { "dependencies": { "@types/three": "^0.169.0", "@types/web-bluetooth": "^0.0.20", "cmd-ts-too": "^0.15.3", "comlink": "^4.4.1", "random-uint-below": "v3.3.0", "three": "^0.170.0" }, "bin": { "scramble": "dist/bin/scramble.js" } }, "sha512-XBpQvFdYRmC3tDU7cUBPHyr96vbHfeekqYIJWot7iUQMpAqZ5dJAD8kyIQWxz3edBqPjJqyxiNWiZMSzUNmYtA=="],
 
     "debug": ["debug@4.4.0", "", { "dependencies": { "ms": "^2.1.3" } }, "sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA=="],
 
