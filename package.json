@@ -14,9 +14,9 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
     "@cubing/dev-config": "^0.3.6",
-    "@types/bun": "^1.2.17",
+    "@types/bun": "^1.2.20",
     "barely-a-dev-server": "^0.8.1",
     "esbuild": "^0.25.5",
-    "printable-shell-command": "^1.1.0"
+    "printable-shell-command": "^1.1.3"
   }
 }
