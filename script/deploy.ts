@@ -16,7 +16,7 @@ interface Credentials {
 const { host, username, password, certFingerprint } = (await file(
   join(
     homedir(),
-    ".ssh/ftps/speedsolving.com/speedsolving-forum.credentials.json",
+    ".ssh/secrets/ftps/speedsolving.com/speedsolving-forum.credentials.json",
   ),
 ).json()) as Credentials;
 
