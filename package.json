@@ -9,7 +9,7 @@
     "prepublishOnly": "make prepublishOnly"
   },
   "dependencies": {
-    "cubing": "^0.58.2"
+    "cubing": ">=0.61.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.6",
