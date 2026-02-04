@@ -32,10 +32,8 @@ const command = new PrintableShellCommand("lftp", [
   ["--user", username],
   ["--password", password],
   host,
-]).spawnBun({
-  stdin: new Response(commands),
-  stderr: "inherit",
-  stdout: "inherit",
-});
+])
+  .stdin({ text: commands })
+  .spawnTransparently();
 
 await command.success;

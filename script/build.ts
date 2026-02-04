@@ -8,7 +8,7 @@ const ADDON_DIST_DIR = `./dist/www.speedsolving.com/${ADDON_SERVER_PATH}/`;
 
 await cp("./src/static", "./dist/", { recursive: true });
 
-build({
+await build({
   format: "esm",
   target: "es2020",
   bundle: true,

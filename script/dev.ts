@@ -1,6 +1,6 @@
 import { barelyServe } from "barely-a-dev-server";
 
-barelyServe({
+await barelyServe({
   entryRoot: "./src/js/",
   port: 3344,
   devDomain: "speedsolving-twizzle.localhost",
