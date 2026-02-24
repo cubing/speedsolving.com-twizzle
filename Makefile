@@ -54,8 +54,8 @@ cache-purge:
 	@echo "To purge the cache once, sudo auth now."
 	@echo "Ctrl-C to cancel"
 	@curl -X POST \
-		"https://api.cloudflare.com/client/v4/zones/$(shell sudo cat ~/.ssh/secrets/CLOUDFLARE_SPEEDSOLVING_COM_ZONE.txt)/purge_cache" \
-		-H "Authorization: Bearer $(shell sudo cat ~/.ssh/secrets/CLOUDFLARE_SPEEDSOLVING_COM_CACHE_TOKEN.txt)" \
+		"https://api.cloudflare.com/client/v4/zones/$(shell sudo cat ~/.local/secrets/speedsolving.com-twizzle/CLOUDFLARE_SPEEDSOLVING_COM_ZONE.txt)/purge_cache" \
+		-H "Authorization: Bearer $(shell sudo cat ~/.local/secrets/speedsolving.com-twizzle/CLOUDFLARE_SPEEDSOLVING_COM_CACHE_TOKEN.txt)" \
 		-H "Content-Type:application/json" \
 		--data '{"purge_everything":true}' # purge cubing.net cache
 
