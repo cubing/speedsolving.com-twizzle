@@ -9,7 +9,7 @@
     "prepublishOnly": "make prepublishOnly"
   },
   "dependencies": {
-    "cubing": ">=0.61.1",
+    "cubing": ">=0.63.2",
     "path-class": "^0.13.1",
     "zod": "^4.3.6"
   },
