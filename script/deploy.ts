@@ -1,24 +1,9 @@
 #!/usr/bin/env -S bun run --
 
-import { homedir } from "node:os";
-import { join } from "node:path";
-import { file } from "bun";
 import { PrintableShellCommand } from "printable-shell-command";
+import { credentials } from "./credentials";
 
-// TODO: validation?
-interface Credentials {
-  host: string;
-  username: string;
-  password: string;
-  certFingerprint: string;
-}
-
-const { host, username, password, certFingerprint } = (await file(
-  join(
-    homedir(),
-    ".ssh/secrets/ftps/speedsolving.com/speedsolving-forum.credentials.json",
-  ),
-).json()) as Credentials;
+const { host, username, password, certFingerprint } = credentials.deploy;
 
 const commands = `set ftp:ssl-force true
 set ftp:ssl-protect-data true
