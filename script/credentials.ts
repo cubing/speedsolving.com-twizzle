@@ -1,5 +1,5 @@
 import { Path } from "path-class";
-import { object, string } from "zod";
+import { object, string } from "zod/mini";
 
 const CREDENTIALS_PATH = Path.homedir.join(
   "./.local/secrets/speedsolving.com-twizzle/credentials.json",
