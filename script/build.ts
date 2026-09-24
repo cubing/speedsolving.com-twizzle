@@ -1,4 +1,4 @@
-import { type BinaryLike, createHash } from "node:crypto";
+import { createHash } from "node:crypto";
 import { cp, readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { build } from "esbuild";
@@ -61,7 +61,7 @@ for (const path of await listFiles(
 
   const contents = await readFile(join(ADDON_DIST_DIR, path));
   // TODO: why don't `bun`'s types work out of the box?
-  sha256HashInstance.update(contents as unknown as BinaryLike);
+  sha256HashInstance.update(contents);
   hashes[`${ADDON_SERVER_PATH}/${path}`] = sha256HashInstance.digest("hex");
 }
 await writeFile(
