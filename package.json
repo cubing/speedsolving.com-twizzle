@@ -22,5 +22,8 @@
     "esbuild": "^0.25.5",
     "printable-shell-command": "^5.0.8",
     "typescript": "^5.9.3"
+  },
+  "patchedDependencies": {
+    "undici-types@7.16.0": "patches/undici-types@7.16.0.patch"
   }
 }
