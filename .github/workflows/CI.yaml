@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,3 +13,4 @@ jobs:
       - run: make setup
       - run: make lint-biome
       - run: make lint-tsc
+      - run: make build
