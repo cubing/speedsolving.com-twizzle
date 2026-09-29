@@ -1,5 +1,9 @@
 {
   "extends": "./node_modules/@cubing/dev-config/ts/es2022-types/tsconfig.json",
-  "compilerOptions": { "noEmit": true, "types": ["node"] },
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["node"],
+    "erasableSyntaxOnly": true
+  },
   "exclude": ["./dist/"]
 }
