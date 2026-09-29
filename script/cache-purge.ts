@@ -1,5 +1,5 @@
 import assert from "node:assert";
-import { credentials } from "./credentials";
+import { credentials } from "./credentials.js";
 
 const { cache_token, zone } = credentials.cloudflare;
 
