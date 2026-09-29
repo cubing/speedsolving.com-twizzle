@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <!-- From: https://github.com/lgarron/minimal-html-style (v1.0.0) -->
+  <meta name="viewport" content="width=device-width, initial-scale=0.75">
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    html {
+      font-family: -apple-system, Roboto, Ubuntu, Tahoma, sans-serif;
+      font-size: 1.25rem;
+      padding: 2em;
+      display: grid;
+      justify-content: center;
+    }
+
+    body {
+      width: 100%;
+      max-width: 40em;
+      margin: 0;
+      overflow: scroll;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Steps</h1>
+
+  <ol>
+    <li>Block <code>https://www.speedsolving.com/misc/twizzle/js/twizzle-forum-link.js</code> in DevTools</li>
+    <li>`make dev`</li>
+    <li>Visit a speedsolving.com thread with an embedded player.</li>
+    <li>Paste this in the JS console after every page load you want to test:</li>
+  </ol>
+
+  <code><textarea id="snippet" style="width: 100%; field-sizing: content;">
+const script = document.createElement("script");
+script.type = "module";
+script.src = "http://speedsolving-twizzle.localhost:3344/misc/twizzle/js/twizzle-forum-link.js";
+document.body.appendChild(script)
+  </textarea></code>
+
+  <button id="copy" type="button">Copy snippet</button>
+  <script>
+    document.querySelector("#copy").addEventListener("click", async () => {
+      await navigator.clipboard.writeText(document.querySelector("#snippet").textContent.trim());
+
+      document.querySelector("#snippet").animate([{ opacity: 0.25 }, { opacity: 1 }], {
+        duration: 250,
+        easing: "ease-out",
+      });
+    })
+  </script>
+
+  <h2>File</h2>
+
+  <a href="./misc/twizzle/js/twizzle-forum-link.js"><code>./misc/twizzle/js/twizzle-forum-link.js</code></a>
+
+</body>
+
+</html>
