@@ -1,7 +1,7 @@
 #!/usr/bin/env -S node --
 
 import { PrintableShellCommand } from "printable-shell-command";
-import { credentials } from "./credentials.js";
+import { credentials } from "./credentials.ts";
 
 const { host, username, password, certFingerprint } = credentials.deploy;
 

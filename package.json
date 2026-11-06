@@ -14,8 +14,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14",
-    "@cubing/dev-config": ">=0.10.3",
+    "@biomejs/biome": "^2.6.5",
+    "@cubing/dev-config": "^0.12.1",
     "@types/node": "^26.6.2",
     "barely-a-dev-server": ">=0.8.5",
     "bun-dx": "^0.1.4",

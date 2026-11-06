@@ -18,8 +18,9 @@ See the [announcement post](https://www.speedsolving.com/threads/embed-algs-and-
 ```js
 const script = document.createElement("script");
 script.type = "module";
-script.src = "http://speedsolving-twizzle.localhost:3344/misc/twizzle/js/twizzle-forum-link.js";
-document.body.appendChild(script)
+script.src =
+  "http://speedsolving-twizzle.localhost:3344/misc/twizzle/js/twizzle-forum-link.js";
+document.body.appendChild(script);
 ```
 
 ## Dependencies

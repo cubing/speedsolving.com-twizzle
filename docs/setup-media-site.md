@@ -1,4 +1,3 @@
-
 Config URL: <https://www.speedsolving.com/admin.php?bb-code-media-sites/twizzle_link_encoded/edit>
 
 Individual fields are separated in this document so they can be copied from e.g. GitHub easily.

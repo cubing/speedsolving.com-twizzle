@@ -1,21 +1,10 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["./node_modules/@cubing/dev-config/biome/biome.json"],
+  "extends": [
+    "./node_modules/@cubing/dev-config/biome/biome.json",
+    "./node_modules/@cubing/dev-config/erasable/biome/biome.json"
+  ],
   "files": {
-    "includes": ["**", "!dist", "!package.json"]
-  },
-  "linter": {
-    "rules": {
-      "correctness": {
-        "useImportExtensions": {
-          "level": "error",
-          "options": {
-            "extensionMappings": {
-              "ts": "js"
-            }
-          }
-        }
-      }
-    }
+    "includes": ["**", "!package.json", "!!dist", "!!target"]
   }
 }
